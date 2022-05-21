@@ -7,21 +7,21 @@
     tools:context=".Edit_Teman">
 
     <Button
-        android:id="@+id/simpanBtn"
+        android:id="@+id/buttonEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:textColor="@color/black"
         android:backgroundTint="@color/blue"
+        android:text="Update"
+        android:textColor="@color/black"
+        app:flow_horizontalBias="0.498"
+        app:flow_verticalBias="0.618"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
-        app:flow_horizontalBias="0.498"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
-        app:flow_verticalBias="0.618"/>
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textId"
         android:layout_width="127dp"
         android:layout_height="66dp"
         android:text="Edit Data"
@@ -47,10 +47,11 @@
             android:id="@+id/edNama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:hint="Nama"
+            android:inputType="textPersonName"
             android:textColor="@color/black"
-            android:textColorHighlight="@color/black"
-            android:background="@color/white"/>
+            android:textColorHighlight="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,9 +69,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:hint="No Telepon"
+            android:hint="Telpon"
+            android:inputType="phone"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"/>
+            android:textColorHint="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

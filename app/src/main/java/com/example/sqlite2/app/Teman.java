@@ -1,4 +1,4 @@
-package com.example.sqlite2.appcontroller;
+package com.example.sqlite2.app;
 
 public class Teman {
     String id;

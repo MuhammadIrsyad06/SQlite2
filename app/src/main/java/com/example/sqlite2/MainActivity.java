@@ -17,8 +17,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sqlite2.adapter.TemanAdapter;
-import com.example.sqlite2.appcontroller.DBController;
-import com.example.sqlite2.appcontroller.Teman;
+import com.example.sqlite2.app.Teman;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -32,12 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private TemanAdapter adapter;
-    private ArrayList<Teman> temanArrayList;
-    DBController controller = new DBController(this);
+    private ArrayList<Teman> temanArrayList=new ArrayList<>();
 
     private FloatingActionButton fab;
     private static final String TAG=MainActivity.class.getSimpleName();
-    private static String url_select="http://localhost/umyTI/bacateman.php";
+    private static String url_select="http://10.0.2/umyTI/bacateman.php";
     private static final String TAG_ID="id";
     private static final String TAG_NAMA="nama";
     private static final String TAG_TELPON="telpon";
@@ -59,12 +57,13 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TemanBaru.class);
+                Intent intent = new Intent(getApplicationContext(), TambahTeman.class);
                 startActivity(intent);
             }
         });
     }
     public  void  BacaData() {
+        temanArrayList.clear();
        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
         JsonArrayRequest jArr = new JsonArrayRequest(url_select, new Response.Listener<JSONArray>() {
             @Override
@@ -83,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+                adapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override
