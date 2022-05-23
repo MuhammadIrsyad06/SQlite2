@@ -2,11 +2,13 @@ package com.example.sqlite2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,74 +26,92 @@ import java.util.Map;
 
 public class TambahTeman extends AppCompatActivity {
 
-    private EditText editNama,editTelpon;
-    private Button simpanBtn;
-    String nm,tlp;
-    int success;
+    TextView idText;
+    EditText edNma, edtelpon;
+    Button saveBtn;
+    String id, nma, tlp, namaEd, telponEd;
+    int sukses;
 
-    private static String url_insert="https://20200140070.praktikumtiumy.com/tambahtm.php";
-    private static final String TAG = TambahTeman.class.getSimpleName();
-    private static final String TAG_SUCCES="success";
-
-    public  void SimpanData()
-    {
-        if(editNama.getText().toString().equals("")||editTelpon.getText().toString().equals("")){
-            Toast.makeText(TambahTeman.this, "Semua harus diisi data", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            nm=editNama.getText().toString();
-            tlp=editTelpon.getText().toString();
-
-            RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
-            StringRequest strReq = new StringRequest(Request.Method.POST, url_insert, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Log.d(TAG, "Response: " + response.toString());
-                    try {
-                        JSONObject jObj = new JSONObject(response);
-                        success = jObj.getInt(TAG_SUCCES);
-                        if (success == 1) {
-                            Toast.makeText(TambahTeman.this, "Sukses simpan data", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(TambahTeman.this, "gagal", Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e(TAG,"Error: "+error.getMessage());
-                    Toast.makeText(TambahTeman.this, "Gagal simpan data", Toast.LENGTH_SHORT).show();
-                }
-            }){
-                @Override
-                protected Map<String,String> getParams(){
-                    Map<String,String> params = new HashMap<>();
-                    params.put("nama",nm);
-                    params.put("telpon",tlp);
-                    return params;
-                }
-            };
-            requestQueue.add(strReq);
-        }
-    }
+    private static String url_update = "https://20200140070.praktikumtiumy.com/tambahtm.php";
+    private static final String TAG = Edit_Teman.class.getSimpleName();
+    private static final String TAG_SUCCES = "success";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_teman);
 
-        editNama=findViewById(R.id.edNama);
-        editNama=findViewById(R.id.edTelpon);
-        simpanBtn=findViewById(R.id.btnSimpan);
 
-        simpanBtn.setOnClickListener(new View.OnClickListener() {
+        idText = findViewById(R.id.textid);
+        edNma = findViewById(R.id.tbNama);
+        edtelpon=findViewById(R.id.tbTelpon);
+        saveBtn=findViewById(R.id.btnSimpan);
+
+        Bundle bundle=getIntent().getExtras();
+        id=bundle.getString("kunci1");
+        nma=bundle.getString("kunci2");
+        tlp=bundle.getString("kunci3");
+
+        idText.setText("Id:" +id);
+        edNma.setText(nma);
+        edtelpon.setText(tlp);
+
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                SimpanData();
+            public void onClick(View v) {
+                EditData();
             }
         });
+    }
+    public void EditData() {
+        namaEd = edNma.getText().toString();
+        telponEd = edtelpon.getText().toString();
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringReq = new StringRequest(Request.Method.POST, url_update, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Respon: " + response.toString());
+                try {
+                    JSONObject jobj = new JSONObject(response);
+                    sukses = jobj.getInt(TAG_SUCCES);
+                    if (sukses == 1) {
+                        Toast.makeText(TambahTeman.this, "Sukses mengedit data", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(TambahTeman.this, "gagal", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Error : " + error.getMessage());
+                Toast.makeText(TambahTeman.this, "Gagal Edit data", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("id", id);
+                params.put("nama", namaEd);
+                params.put("telpon", telponEd);
+
+                return params;
+            }
+        };
+        requestQueue.add(stringReq);
+        CallHomeActivity();
+    }
+    public void CallHomeActivity()
+    {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+
     }
 }

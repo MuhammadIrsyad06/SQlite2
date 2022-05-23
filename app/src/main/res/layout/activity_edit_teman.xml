@@ -49,10 +49,9 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:hint="Nama"
-            android:inputType="textPersonName"
+            android:inputType="phone"
             android:textColor="@color/black"
-            android:textColorHighlight="@color/black" />
-
+            android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -65,9 +64,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edTelp"
+            android:id="@+id/edTelp2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@color/white"
             android:hint="Telpon"
             android:inputType="phone"

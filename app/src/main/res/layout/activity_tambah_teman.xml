@@ -7,7 +7,7 @@
     tools:context=".TambahTeman">
 
     <EditText
-        android:id="@+id/edNama"
+        android:id="@+id/tbNama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="112dp"
@@ -22,17 +22,17 @@
         app:layout_constraintVertical_bias="0.23" />
 
     <EditText
-        android:id="@+id/edTelpon"
+        android:id="@+id/tbTelpon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
         android:ems="10"
         android:hint="Telpon"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/edNama"
+        app:layout_constraintEnd_toEndOf="@+id/tbNama"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/edNama"
-        app:layout_constraintTop_toBottomOf="@+id/edNama" />
+        app:layout_constraintStart_toStartOf="@+id/tbNama"
+        app:layout_constraintTop_toBottomOf="@+id/tbNama" />
 
     <Button
         android:id="@+id/btnSimpan"
@@ -41,9 +41,21 @@
         android:layout_marginTop="15dp"
         android:text="Simpan"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/edTelpon"
+        app:layout_constraintEnd_toEndOf="@+id/tbTelpon"
         app:layout_constraintHorizontal_bias="0.449"
-        app:layout_constraintStart_toStartOf="@+id/edTelpon"
-        app:layout_constraintTop_toBottomOf="@+id/edTelpon"
+        app:layout_constraintStart_toStartOf="@+id/tbTelpon"
+        app:layout_constraintTop_toBottomOf="@+id/tbTelpon"
         app:layout_constraintVertical_bias="0.256" />
+
+    <TextView
+        android:id="@+id/textid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tambah Teman"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/tbNama"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

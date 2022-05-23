@@ -42,7 +42,7 @@ public class Edit_Teman extends AppCompatActivity {
 
         idText=findViewById(R.id.textId);
         Nama=findViewById(R.id.edNama);
-        Telepon=findViewById(R.id.edTelp);
+        Telepon=findViewById(R.id.edTelp2);
         Save=findViewById(R.id.buttonEdit);
 
         Bundle bundle=getIntent().getExtras();
